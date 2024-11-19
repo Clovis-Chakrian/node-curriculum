@@ -7,12 +7,14 @@ import { swaggerOptions } from './src/infra/docs/swaggerConfig.js';
 import { sequelizeConn } from './src/infra/database/sequelizeConfig.js';
 import './src/infra/database/relationshipConfig.js';
 import { exceptionHandler } from './src/api/middlewares/exceptionHandler.js';
+import cors from 'cors';
 
 const port = process.env.PORT || 3000;
 
 const app = express();
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use(cors())
 app.use(express.json());
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
