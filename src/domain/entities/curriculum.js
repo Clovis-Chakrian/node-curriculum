@@ -7,6 +7,7 @@ Curriculum.init(
   {
     curriculumId: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     curriculumNick: {

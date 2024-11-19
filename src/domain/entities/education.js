@@ -7,6 +7,7 @@ Education.init(
   {
     educationId: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     begined: {
