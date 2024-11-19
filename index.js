@@ -6,16 +6,18 @@ import { routes } from './src/api/index.js';
 import { swaggerOptions } from './src/infra/docs/swaggerConfig.js';
 import { sequelizeConn } from './src/infra/database/sequelizeConfig.js';
 import './src/infra/database/relationshipConfig.js';
+import { exceptionHandler } from './src/api/middlewares/exceptionHandler.js';
 
 const port = process.env.PORT || 3000;
 
 const app = express();
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-
+app.use(express.json());
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(routes);
+app.use(exceptionHandler)
 
 sequelizeConn.sync({ force: process.env.ERASE_DATABASE_ON_SYNC }).then(async () => {
   app.listen(port, () => {
