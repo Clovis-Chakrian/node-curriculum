@@ -1,11 +1,3 @@
-/*
-public List<ListCurriculumDto> list();
-    public DetailCurriculumDto detail(UUID curriculumId) throws ElementNotFoundException;
-    public DetailCurriculumDto create(NewCurriculumDto newCurriculumDto);
-    public DetailCurriculumDto update(UUID curriculumId, UpdatedCurriculumDto updatedCurriculumDto) throws ElementNotFoundException;
-    public void delete(UUID curriculumId);
-*/
-
 import { curriculumRepository } from "../../infra/repositories/curriculumRepository.js";
 
 const curriculumService = {
@@ -13,20 +5,20 @@ const curriculumService = {
     return await curriculumRepository.getAll();
   },
 
-  detail: (curriculumId) => {
-
+  detail: async (curriculumId) => {
+    return await curriculumRepository.getById(curriculumId);
   },
 
-  create: (newCurriculumDto) => {
-
+  create: async (curriculum) => {
+    return await curriculumRepository.save(curriculum);
   },
 
-  update: (curriculumId, updatedCurriculumDto) => {
-
+  update: async (curriculumId, curriculum) => {
+    return await curriculumRepository.update(curriculumId, curriculum)
   },
 
-  delete: (curriculumId) => {
-
+  delete: async (curriculumId) => {
+    return await curriculumRepository.destroy(curriculumId);
   }
 };
 
